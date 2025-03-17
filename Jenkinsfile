@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('git checkout'){
             steps{
-                git "branch:master", "url:https://github.com/krishna-mss/maven-web-application.git"
+                git "url:https://github.com/krishna-mss/maven-web-application.git"
             }
         }
         stage('Build Maven'){
