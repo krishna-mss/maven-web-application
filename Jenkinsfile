@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+        maven 'Maven 3.9.8'  // Name you configured in Global Tool Configuration
+    }
     stages{
         stage('git checkout'){
             steps{
@@ -8,7 +11,7 @@ pipeline{
         }
         stage('Build Maven'){
             steps{
-                sh 'mvn clean install'
+                sh "mvn clean installs"
             }
         }   
     }
