@@ -36,8 +36,6 @@ pipeline{
 
                     def pom = readMavenPom file: "pom.xml"
 
-                    def nexusRepo = pom.version.endswith('SNAPSHOT') ? "maven-snapshots" : "maven-releases"
-
                      nexusArtifactUploader artifacts: 
                   [
                     [
@@ -52,8 +50,16 @@ pipeline{
                              nexusUrl: '3.110.186.253:8081',
                               nexusVersion: 'nexus3',
                                protocol: 'http',
-                                repository: 'nexusRepo',
+                                repository: 'nexusRepomaven-releases',
                                  version: '${pom.version}'
+                }
+            }
+        }
+        staage('docker image'){
+            steps{
+                script{
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID krishna122/$JOB_NAME:v1.$BUILD_ID'
                 }
             }
         }
