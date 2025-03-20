@@ -25,7 +25,29 @@ pipeline{
         stage('quality status'){
             steps{
                 script{
-                   waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
+                }
+            }
+        }
+        stage('upload artifacte'){
+            steps{
+                script{
+                    nexusArtifactUploader artifacts: 
+                    [
+                        [
+                            artifactId: 'maven-web-application', 
+                            classifier: '', 
+                            file: 'target/maven-web-application.war', 
+                            type: 'war'
+                        ]
+                    ], 
+                    credentialsId: 'nexus-key', 
+                    groupId: 'com.mt', 
+                    nexusUrl: '13.201.63.201:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'maven-release', 
+                    version: '1.0.0'
                 }
             }
         }
