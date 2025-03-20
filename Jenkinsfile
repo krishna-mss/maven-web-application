@@ -2,7 +2,7 @@
 pipeline{
     agent any
     stages{
-        stage('git checkout'){
+         stage('git checkout'){
             steps{
                 git "https://github.com/krishna-mss/maven-web-application.git"
             }
@@ -33,7 +33,7 @@ pipeline{
         stage('upload artifact'){
             steps{
                 script{
-                  nexusArtifactUploader artifacts: 
+                     nexusArtifactUploader artifacts: 
                   [
                     [
                         artifactId: 'maven-web-application',
@@ -49,5 +49,8 @@ pipeline{
                                protocol: 'http',
                                 repository: 'maven-releases',
                                  version: '2.0.0'
-    }
+                }
+            }
+        }
+   }
 }
