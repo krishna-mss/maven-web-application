@@ -16,16 +16,16 @@ pipeline{
         stage('static code analysis'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-key') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+                   withSonarQubeEnv(credentialsId: 'sonar-key') {
+                    sh 'mvn clean package sonar:sonar'
+                   }
                 }
             }
         }
         stage('quality status'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
+                   waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
         }
