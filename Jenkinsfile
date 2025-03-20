@@ -33,6 +33,8 @@ pipeline{
         stage('upload artifacte'){
             steps{
                 script{
+
+                    def pom = readMavenPom file : "pom.xml"
                     nexusArtifactUploader artifacts: 
                     [
                         [
@@ -48,7 +50,7 @@ pipeline{
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'maven-release', 
-                    version: '1.0.0'
+                    version: '${pom.version}'
                 }
             }
         }
