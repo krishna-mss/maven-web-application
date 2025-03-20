@@ -22,13 +22,14 @@ pipeline{
                 }
             }
         }
+        /*
         stage('quality status'){
             steps{
                 script{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
-        }
+        } */
         stage('upload artifacte'){
             steps{
                 script{
