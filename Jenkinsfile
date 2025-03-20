@@ -43,8 +43,8 @@ pipeline{
                          classifier: '', 
                          file: 'target/maven-web-application.war',
                           type: 'war'
-                          ]
-                          ],
+                    ]
+                  ],
                            credentialsId: 'nexus-auth',
                             groupId: 'com.mt',
                              nexusUrl: '3.110.186.253:8081',
@@ -55,10 +55,10 @@ pipeline{
                 }
             }
         }
-        staage('docker image'){
+        stage('creage docker image'){
             steps{
                 script{
-                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID krishna122/$JOB_NAME:v1.$BUILD_ID'
                 }
             }
