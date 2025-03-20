@@ -29,7 +29,7 @@ pipeline{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
-        } */
+        } 
         stage('upload artifacte'){
             steps{
                 script{
@@ -52,6 +52,14 @@ pipeline{
                     protocol: 'http', 
                     repository: 'maven-release', 
                     version: '2.0.0'
+                }
+            }
+        } */
+        stage('docer image'){
+            steps{
+                script{
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID krishna122/$JOB_NAME:v1.$BUILD_ID'
                 }
             }
         }
