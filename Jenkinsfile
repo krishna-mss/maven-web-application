@@ -29,7 +29,7 @@ pipeline{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
-        }
+        } /*
         stage('upload artifact'){
             steps{
                 script{
@@ -54,7 +54,7 @@ pipeline{
                                  version: '${pom.version}'
                 }
             }
-        }
+        } */
         stage('creage docker image'){
             steps{
                 script{
