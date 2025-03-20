@@ -50,8 +50,8 @@ pipeline{
                     nexusUrl: '13.201.63.201:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'nexusRepo', 
-                    version: '${readpomVersion.version}'
+                    repository: 'maven-release', 
+                    version: '2.0.0'
                 }
             }
         }
