@@ -30,6 +30,28 @@ pipeline{
                 }
             }
         }
-
+        stage('upload artifact'){
+            steps{
+                script{
+                    
+                    nexusArtifactUploader artifacts: 
+                    [
+                        [
+                            artifactId: 'maven-web-application',
+                             classifier: '', 
+                             file: 'target/maven-web-application', 
+                             type: 'war'
+                             ]
+                             ],
+                              credentialsId: 'nexus-key', 
+                              groupId: 'com.mt', 
+                              nexusUrl: '3.110.186.253:8081',
+                               nexusVersion: 'nexus3', 
+                               protocol: 'http', 
+                               repository: 'maven-releases',
+                                version: '2.0.0'
+                }
+            }
+        }
     }
 }
