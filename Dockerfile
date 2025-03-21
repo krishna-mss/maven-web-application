@@ -1,2 +1,10 @@
-FROM tomcat:9.0-jdk11
-COPY target/maven-web-application.war /usr/local/tomcat/webapps/maven-web-application.war
+FROM maven as build
+WORKDIR /app
+COPY . .
+RUN mvn install
+
+FROM openjdk:11.0
+WOKDIR /app
+COPY --from=build /app/target/maven-web-application.war /app/
+EXPOSE 9090
+CMD ['java','jar','maven-web-application.war']
