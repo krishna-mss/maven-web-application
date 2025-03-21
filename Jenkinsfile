@@ -10,16 +10,23 @@ pipeline{
             steps{
                 sh 'mvn clean install'
             }
-        } /*
+        } 
         stage('static code analysis'){
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-key') {
-                        sh 'mvn clean package sonar:sonar'
+                        sh 'mvn clean package soanr:sonar'
                     }
                 }
             }
-        } */
+        }
+        stage('quality statu'){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
+                }
+            }
+        }
         stage('nexus'){
             steps{
                 script{
@@ -29,16 +36,17 @@ pipeline{
                             artifactId: 'maven-web-application',
                              classifier: '',
                               file: 'target/maven-web-application.war',
-                               type: ''
+                               type: 'war'
                                ]
                                ], 
                                credentialsId: 'nexus-key',
                                 groupId: 'com.mt',
-                                 nexusUrl: '65.0.204.102:8081', 
-                                 nexusVersion: 'nexus3',
-                                  protocol: 'http', 
-                                  repository: 'maven-releases', 
-                                  version: '1.0.1'
+                                 nexusUrl: '3.108.223.39:8081',
+                                  nexusVersion: 'nexus3',
+                                   protocol: 'http',
+                                    repository: 'maven-releases',
+                                     version: '1.0.1'
+                            
                 }
             }
         }
