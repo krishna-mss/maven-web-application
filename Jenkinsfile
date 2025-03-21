@@ -26,7 +26,7 @@ pipeline{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
-        }
+        }  /*
         stage('nexus'){
             steps{
                 script{
@@ -52,7 +52,7 @@ pipeline{
                              
                 }
             }
-        }
+        }  */
 
         stage('docker image'){
 
