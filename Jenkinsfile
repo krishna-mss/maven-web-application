@@ -16,9 +16,9 @@ pipeline{
         stage('static code analysis'){
            steps{
             script{
-                 withSonarQubeEnv(credentialsId: 'sonar-key') {
+                withSonarQubeEnv(credentialsId: 'sonar-key') {
                     sh 'mvn clean package sonar:sonar'
-                 }
+                }
             }
            }
         }
@@ -26,35 +26,32 @@ pipeline{
         stage('quality status'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
+                   waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
                 }
             }
-        } /*
+        } 
         stage('upload artifact'){
             steps{
                 script{
-
-                    def pom = readMavenPom file: "pom.xml"
-
-                     nexusArtifactUploader artifacts: 
-                  [
+                    nexusArtifactUploader artifacts: 
                     [
-                        artifactId: 'maven-web-application',
-                         classifier: '', 
-                         file: 'target/maven-web-application.war',
-                          type: 'war'
-                    ]
-                  ],
-                           credentialsId: 'nexus-auth',
-                            groupId: 'com.mt',
-                             nexusUrl: '3.110.186.253:8081',
-                              nexusVersion: 'nexus3',
-                               protocol: 'http',
-                                repository: 'nexusRepomaven-releases',
-                                 version: '${pom.version}'
+                        [
+                            artifactId: 'maven-web-application',
+                             classifier: '',
+                              file: 'target/maven-web-application.war', 
+                              type: 'war'
+                              ]
+                              ],
+                               credentialsId: 'nexus-api',
+                                groupId: 'com.mt',
+                                 nexusUrl: '13.233.161.39:8081', 
+                                 nexusVersion: 'nexus3', 
+                                 protocol: 'http',
+                                  repository: 'maven-releases', 
+                                  version: '1.0.1'
                 }
             }
-        } */
+        } 
         stage('creage docker image'){
             steps{
                 script{
