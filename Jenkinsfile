@@ -16,7 +16,7 @@ pipeline{
         stage('static code analysis'){
            steps{
             script{
-                withSonarQubeEnv(credentialsId: 'sonar-key') {
+                withSonarQubeEnv(credentialsId: 'sonar-app') {
                     sh 'mvn clean package sonar:sonar'
                 }
             }
@@ -26,10 +26,9 @@ pipeline{
         stage('quality status'){
             steps{
                 script{
-                   waitForQualityGate abortPipeline: false, credentialsId: 'sonar-key'
-                }
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-app'                }
             }
-        } 
+        }  /*
         stage('upload artifact'){
             steps{
                 script{
@@ -60,6 +59,6 @@ pipeline{
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID krishna122/$JOB_NAME:latest'
                 }
             }
-        }
+        }*/
    }
 }
