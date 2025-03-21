@@ -4,7 +4,7 @@ pipeine{
         stage('git checkout'){
             steps{
                 git 'https://github.com/krishna-mss/maven-web-application.git'
-           }
+            }
        }
        stage('build'){
         steps{
