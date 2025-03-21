@@ -40,16 +40,16 @@ pipeline{
                              classifier: '',
                               file: 'target/maven-web-application.war',
                                type: 'war'
-                               ]
+                        ]
                     ], 
-                    credentialsId: 'nexus-key',
-                    groupId: 'com.mt',
-                     nexusUrl: '3.108.223.39:8081',
-                     nexusVersion: 'nexus3',
-                     protocol: 'http',
-                    repository: 'maven-releases',
-                    version: "${pom.version}"
-                            
+                                credentialsId: 'nexus-key',
+                                 groupId: 'com.mt',
+                                  nexusUrl: '3.108.223.39:8081',
+                                 nexusVersion: 'nexus3',
+                                 protocol: 'http',
+                                repository: 'maven-releases',
+                                version: "${pom.version}"
+                             
                 }
             }
         }
