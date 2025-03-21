@@ -33,7 +33,7 @@ pipeline{
 
                     def pom = readMavenPom file: 'pom.xml'
 
-                    def nexusRepo = pom.version.endswith("SNAPSHOT") ? 'maven-snapshots' : 'maven-releases'
+                    def nexusRepo = pom.version.endswith("SNAPSHOT") ? "maven-snapshots" : "maven-releases"
 
                     nexusArtifactUploader artifacts: 
                     [
@@ -43,14 +43,14 @@ pipeline{
                               file: 'target/maven-web-application.war',
                                type: 'war'
                                ]
-                               ], 
-                               credentialsId: 'nexus-key',
-                                groupId: 'com.mt',
-                                 nexusUrl: '3.108.223.39:8081',
-                                  nexusVersion: 'nexus3',
-                                   protocol: 'http',
-                                    repository: 'nexusRepo',
-                                     version: '$(pom.version)'
+                    ], 
+                    credentialsId: 'nexus-key',
+                    groupId: 'com.mt',
+                     nexusUrl: '3.108.223.39:8081',
+                     nexusVersion: 'nexus3',
+                     protocol: 'http',
+                    repository: 'nexusRepo',
+                    version: "${pom.version}"
                             
                 }
             }
